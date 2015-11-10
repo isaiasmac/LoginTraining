@@ -13,6 +13,11 @@
         android:name=".MyApplication">
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <!-- SERVER_KEY: AIzaSyCffmCAuZ2M9YyJxtvtt8sktAIWIA6q2lo -->
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider177121222632756"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
