@@ -17,6 +17,8 @@ import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -38,9 +40,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private LoginButton loginButton;
     private CallbackManager callbackManager;
 
-    // Google
+    // Google SigIn
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
+
+    // Google Analytics
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +74,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         // Views
         //mStatusTextView = (TextView) findViewById(R.id.status);
         //configGoogleSignInButton();
+
+        MyApplication application = (MyApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Home Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
